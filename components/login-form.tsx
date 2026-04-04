@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { Field, FieldDescription, FieldGroup } from "@/components/ui/field"
+import { Field, FieldContent, FieldDescription, FieldGroup, FieldLabel, FieldTitle } from "@/components/ui/field"
 import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { useState } from "react"
@@ -18,18 +18,14 @@ interface LoginFormProps extends React.ComponentProps<"div"> {
   setRole: (role: RoleType) => void
 }
 
-export function LoginForm({
-  className,
-  setRole,
-  ...props
-}: LoginFormProps) {
+export function LoginForm({ className, setRole, ...props }: LoginFormProps) {
   const [selectedRole, setSelectedRole] = useState<RoleType>("viewer")
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     setRole(selectedRole)
-    console.log("Role : ",selectedRole);
-    redirect("/dashboard");
+    console.log("Role : ", selectedRole)
+    redirect("/dashboard")
   }
 
   return (
@@ -44,24 +40,27 @@ export function LoginForm({
         <CardContent>
           <form onSubmit={handleSubmit}>
             <FieldGroup>
-              <RadioGroup value={selectedRole} onValueChange={(value) => setSelectedRole(value as RoleType)}>
-                <Field>
-                  <Button variant="outline" type="button" asChild>
-                    <label className="flex items-center gap-3 cursor-pointer">
-                      <RadioGroupItem value="admin" id="admin" />
-                      <Label htmlFor="admin" className="mb-0">Login as Admin</Label>
-                    </label>
-                  </Button>
-                  <Button variant="outline" type="button" asChild>
-                    <label className="flex items-center gap-3 cursor-pointer">
-                      <RadioGroupItem value="viewer" id="viewer" />
-                      <Label htmlFor="viewer" className="mb-0">Login as Viewer</Label>
-                    </label>
-                  </Button>
-                </Field>
-                <Field>
-                  <Button type="submit">Login</Button>
-                </Field>
+              <RadioGroup defaultValue={selectedRole} className="max-w-sm">
+
+                <FieldLabel htmlFor="admin">
+                  <Field orientation="horizontal">
+                    <FieldContent>
+                      <FieldTitle>Admin</FieldTitle>
+                    </FieldContent>
+                    <RadioGroupItem value="admin" id="admin" />
+                  </Field>
+                </FieldLabel>
+                
+                <FieldLabel htmlFor="viewer">
+                  <Field orientation="horizontal">
+                    <FieldContent>
+                      <FieldTitle>Viewer</FieldTitle>
+                    </FieldContent>
+                    <RadioGroupItem value="viewer" id="viewer" />
+                  </Field>
+                </FieldLabel>
+                <Button type="submit">Login</Button>
+                
               </RadioGroup>
             </FieldGroup>
           </form>
@@ -74,4 +73,3 @@ export function LoginForm({
     </div>
   )
 }
-

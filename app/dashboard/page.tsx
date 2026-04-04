@@ -1,15 +1,18 @@
+"use client"
+
 import { AppSidebar } from "@/components/app-sidebar"
 import { ChartAreaInteractive } from "@/components/chart-area-interactive"
-import { DataTable } from "@/components/data-table"
+import { DataTable } from "@/components/transaction-table"
 import { TotalBalanceCard } from "@/components/total-balance-cards"
 import { SiteHeader } from "@/components/site-header"
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
 
-import data from "./data.json"
 import { BudgetOverviewCard } from "@/components/budget-overview-card"
 import { SpendingCard } from "@/components/spending-card"
 
 export default function Page() {
+
+
   return (
     <SidebarProvider
       style={
@@ -33,7 +36,7 @@ export default function Page() {
               <div className="flex justify-between px-4 lg:px-6 lg:gap-4 :gap-2">
                 <ChartAreaInteractive />
               </div>
-              <DataTable data={data} />
+              <DataTable />
             </div>
           </div>
         </div>
