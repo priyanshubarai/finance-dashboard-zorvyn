@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { type transactionDataSchema } from '@/components/transaction-table/schema';
+import { type transactionDataSchema } from '@/components/dashboard/transaction-table/schema';
 import transactionData from "@/database/transaction_data.json"
 
 export type transactionDataStoreType = {

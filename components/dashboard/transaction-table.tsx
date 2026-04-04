@@ -25,6 +25,8 @@ import {
   ChevronRightIcon,
   ChevronsRightIcon,
   Calendar as CalendarIcon,
+  ArrowUp,
+  ArrowDown,
 } from "lucide-react"
 import {
   Popover,
@@ -79,8 +81,8 @@ import { Tabs, TabsContent } from "@/components/ui/tabs"
 import { Separator } from "@/components/ui/separator"
 import { type transactionDataSchema } from "./transaction-table/schema"
 import { columns } from "./transaction-table/columns"
-import { SearchBar } from "./ui/searchbar"
-import { Field, FieldLabel, FieldGroup, FieldSet } from "./ui/field"
+import { SearchBar } from "../ui/searchbar"
+import { Field, FieldLabel, FieldGroup, FieldSet } from "../ui/field"
 import { useTransactionDataStore } from "@/lib/store/transactionDataStore"
 
 export function DataTable() {
@@ -110,6 +112,14 @@ export function DataTable() {
       sorting,
       columnFilters,
       pagination,
+    },
+    initialState: {
+      sorting: [
+        {
+          id: 'description',
+          desc: false,
+        },
+      ],
     },
     getRowId: (row) => row.id.toString(),
     onSortingChange: setSorting,
@@ -185,8 +195,7 @@ export function DataTable() {
                 .getAllColumns()
                 .filter(
                   (column) =>
-                    typeof column.accessorFn !== "undefined" &&
-                    column.getCanHide()
+                    typeof column.accessorFn !== "undefined"
                 )
                 .map((column) => {
                   return (
@@ -379,6 +388,44 @@ export function DataTable() {
                   {headerGroup.headers.map((header) => {
                     return (
                       <TableHead key={header.id} colSpan={header.colSpan}>
+                        {header.isPlaceholder ? null : (
+                          <div
+                            className={
+                              header.column.getCanSort()
+                                ? 'cursor-pointer select-none flex items-center gap-2'
+                                : '' 
+                            }
+                            onClick={header.column.getToggleSortingHandler()}
+                            title={
+                              header.column.getCanSort()
+                                ? header.column.getNextSortingOrder() === 'asc'
+                                  ? 'Sort ascending'
+                                  : header.column.getNextSortingOrder() === 'desc'
+                                    ? 'Sort descending'
+                                    : 'Clear sort'
+                                : undefined
+                            }
+                          >
+                            {flexRender(
+                              header.column.columnDef.header,
+                              header.getContext(),
+                            )}
+                            {{
+                              asc: <ArrowUp size={14}/>,
+                              desc: <ArrowDown size={14}/>,
+                            }[header.column.getIsSorted() as string] ?? null}
+                          </div>
+                        )}
+                      </TableHead>
+                    )
+                  })}
+                </TableRow>
+              ))}
+              {/* {table.getHeaderGroups().map((headerGroup) => (
+                <TableRow key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => {
+                    return (
+                      <TableHead key={header.id} colSpan={header.colSpan}>
                         {header.isPlaceholder
                           ? null
                           : flexRender(
@@ -389,7 +436,7 @@ export function DataTable() {
                     )
                   })}
                 </TableRow>
-              ))}
+              ))} */}
             </TableHeader>
             <TableBody>
               {table.getRowModel().rows?.length ? (

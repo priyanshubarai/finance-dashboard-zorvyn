@@ -30,7 +30,7 @@ import { TableCellViewer } from "./table-cell-viewer"
 import {
   type transactionDataSchema,
   type transactionTableRowSchema,
-} from "@/components/transaction-table/schema"
+} from "@/components/dashboard/transaction-table/schema"
 import { Pencil } from "lucide-react"
 import { useTransactionDataStore } from "@/lib/store/transactionDataStore"
 
@@ -59,17 +59,23 @@ export const columns = [
         month: "short",
       })
     },
+    header: "Date",
+    sortingFn: "text"
   }),
 
   columnHelper.accessor("description", {
     cell: (cell) => {
       return <span>{cell.getValue()}</span>
     },
+    header: "Description",
+    sortingFn: "text"
   }),
   columnHelper.accessor("category", {
     cell: (cell) => {
       return <span>{cell.getValue()}</span>
     },
+    header: "Category",
+    sortingFn: "text"
   }),
   columnHelper.accessor("type", {
     cell: (cell) => {
@@ -90,11 +96,15 @@ export const columns = [
         </div>
       )
     },
+    header: "Type",
+    sortingFn: "text"
   }),
   columnHelper.accessor("amount", {
     cell: (cell) => {
       return <span>$ {cell.getValue()}</span>
     },
+    header: "Amount",
+    sortingFn: "text"
   }),
   {
     id: "actions",

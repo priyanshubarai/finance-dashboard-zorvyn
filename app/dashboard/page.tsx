@@ -1,14 +1,14 @@
 "use client"
 
-import { AppSidebar } from "@/components/app-sidebar"
-import { ChartAreaInteractive } from "@/components/chart-area-interactive"
-import { DataTable } from "@/components/transaction-table"
-import { TotalBalanceCard } from "@/components/total-balance-cards"
-import { SiteHeader } from "@/components/site-header"
+import { AppSidebar } from "@/components/sidebar/app-sidebar"
+import { ChartAreaInteractive } from "@/components/dashboard/chart-area-interactive"
+import { DataTable } from "@/components/dashboard/transaction-table"
+import { TotalBalanceCard } from "@/components/dashboard/total-balance-cards"
+import { SiteHeader } from "@/components/layout/site-header"
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
 
-import { BudgetOverviewCard } from "@/components/budget-overview-card"
-import { SpendingCard } from "@/components/spending-card"
+import { BudgetOverviewCard } from "@/components/dashboard/budget-overview-card"
+import { SpendingCard } from "@/components/dashboard/spending-card"
 
 export default function Page() {
 

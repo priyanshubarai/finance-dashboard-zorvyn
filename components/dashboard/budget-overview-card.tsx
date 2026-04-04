@@ -10,7 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { ArrowUpRight } from "lucide-react"
-import { Button } from "./ui/button"
+import { Button } from "@/components/ui/button"
 import { redirect } from "next/navigation"
 import { Progress } from "@/components/ui/progress"
 
