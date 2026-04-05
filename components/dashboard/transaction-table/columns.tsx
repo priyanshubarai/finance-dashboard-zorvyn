@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { type transactionTableRowSchema } from "@/components/dashboard/transaction-table/schema"
 import { useTransactionDataStore } from "@/lib/store/transactionDataStore"
 import { Trash } from "lucide-react"
+import { useRoleStore } from "@/lib/store/roleStore"
 
 const columnHelper = createColumnHelper<transactionTableRowSchema>()
 
@@ -87,8 +88,9 @@ export const columns = [
   }),
   {
     id: "actions",
-    cell: ({ row }: { row: { original: transactionTableRowSchema } }) => (
-      <ActionsCell row={row} />
-    ),
+    cell: ({ row }: { row: { original: transactionTableRowSchema } }) => {
+      const {role} = useRoleStore()
+      return role === "admin" ? <ActionsCell row={row} /> : null
+    },
   },
 ]
