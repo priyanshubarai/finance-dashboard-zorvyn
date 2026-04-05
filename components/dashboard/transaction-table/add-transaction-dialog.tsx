@@ -25,6 +25,7 @@ import { Field, FieldLabel, FieldGroup, FieldSet } from "@/components/ui/field"
 import { useTransactionDataStore } from "@/lib/store/transactionDataStore"
 import { useTransactionTableStore } from "@/lib/store/transactionTableStore"
 import { type transactionDataSchema } from "./schema"
+import { useRoleStore } from "@/lib/store/roleStore"
 
 function formatToYYYYMMDD(date: Date): string {
   const year = date.getFullYear()
@@ -34,6 +35,7 @@ function formatToYYYYMMDD(date: Date): string {
 }
 
 export function AddTransactionDialog() {
+  const { role } = useRoleStore()
   const { addNewTransaction } = useTransactionDataStore()
   const {
     isAddDialogOpen,
@@ -63,7 +65,7 @@ export function AddTransactionDialog() {
   }
 
   const handleAddTransaction = () => {
-    if (!formDate) return
+    if (!formDate || role !== "admin") return
 
     const newTransaction: transactionDataSchema = {
       id: crypto.randomUUID().toString(),
@@ -86,9 +88,11 @@ export function AddTransactionDialog() {
 
   return (
     <Dialog open={isAddDialogOpen} onOpenChange={handleOpenChange}>
-      <DialogTrigger className="flex gap-1 items-center flex-row rounded outline-3 p-1">
-        <PlusIcon /> <span className="text-sm">Add Transaction</span>
-      </DialogTrigger>
+      {role === "admin" && (<>
+        <DialogTrigger className="flex gap-1 items-center flex-row rounded outline-3 p-1">
+          <PlusIcon /> <span className="text-sm">Add Transaction</span>
+        </DialogTrigger>
+      </>)}
       <DialogContent>
         <form
           onSubmit={(e) => {

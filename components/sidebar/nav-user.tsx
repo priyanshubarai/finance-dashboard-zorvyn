@@ -21,6 +21,9 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar"
 import { EllipsisVerticalIcon, CircleUserRoundIcon, CreditCardIcon, BellIcon, LogOutIcon } from "lucide-react"
+import { redirect } from "next/navigation"
+import { Badge } from "../ui/badge"
+import { useRoleStore } from "@/lib/store/roleStore"
 
 export function NavUser({
   user,
@@ -32,6 +35,12 @@ export function NavUser({
   }
 }) {
   const { isMobile } = useSidebar()
+  const { role } = useRoleStore();
+  const handleLogout = () => {
+    //delete token and cookies logic
+    redirect("/");
+  }
+
 
   return (
     <SidebarMenu>
@@ -62,17 +71,21 @@ export function NavUser({
             sideOffset={4}
           >
             <DropdownMenuLabel className="p-0 font-normal">
-              <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <Avatar className="h-8 w-8 rounded-lg">
-                  <AvatarImage src={user.avatar} alt={user.name} />
-                  <AvatarFallback className="rounded-lg">CN</AvatarFallback>
-                </Avatar>
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-medium">{user.name}</span>
-                  <span className="truncate text-xs text-muted-foreground">
-                    {user.email}
-                  </span>
+              <div className="flex justify-between gap-2 px-1 py-1.5 text-left text-sm">
+                <div className="flex items-center gap-2">
+                  <Avatar className="h-8 w-8 rounded-lg">
+                    <AvatarImage src={user.avatar} alt={user.name} />
+                    <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                  </Avatar>
+                  <div className="grid flex-1 text-left text-sm leading-tight">
+                    <span className="truncate font-medium">{user.name}</span>
+                    <span className="truncate text-xs text-muted-foreground">
+                      {user.email}
+                    </span>
+                  </div>
+
                 </div>
+                <Badge variant="secondary">{role}</Badge>
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
@@ -94,7 +107,7 @@ export function NavUser({
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={() => handleLogout()}>
               <LogOutIcon
               />
               Log out
