@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "grocery budget",
+    "total": 1000,
+    "current": 450
+  },
+  {
+    "id": 2,
+    "title": "monthly rent",
+    "total": 12000,
+    "current": 12000
+  },
+  {
+    "id": 3,
+    "title": "gym membership",
+    "total": 2500,
+    "current": 1250
+  },
+  {
+    "id": 4,
+    "title": "entertainment budget",
+    "total": 3000,
+    "current": 3100
+  }
+]

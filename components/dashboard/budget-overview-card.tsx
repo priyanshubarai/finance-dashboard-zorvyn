@@ -13,6 +13,7 @@ import { ArrowUpRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { redirect } from "next/navigation"
 import { Progress } from "@/components/ui/progress"
+import budgetData from "@/database/budget-data.json"
 
 export function BudgetOverviewCard() {
   return (
@@ -33,12 +34,18 @@ export function BudgetOverviewCard() {
           </CardAction>
         </CardHeader>
         <CardContent className="flex flex-col gap-3 overflow-y-scroll h-83 py-1">
-          <BudgetCards
-            title={"Marketing budget"}
-            badgeText={"almost reached"}
-            total={5000}
-            current={4200}
-          />
+          {budgetData.length ? 
+          budgetData.map((item)=>(
+            <BudgetCards
+              key={item.id}
+              title={item.title}
+              badgeText={((item.current * 100)/item.total) >= 100  ? "reached" : ((item.current * 100)/item.total) >= 50 ? "almost reached" : "safe to spend"}
+              total={item.total}
+              current={item.current}
+            />
+          ))
+          : (<span className="font-light text-xl">No Budget Data</span>)}
+          
           <BudgetCards
             title={"Marketing budget"}
             badgeText={"almost reached"}
@@ -80,7 +87,7 @@ function BudgetCards({
       </div>
       <CardTitle>${current}/${total}</CardTitle>
       <Progress className="-my-3" value={(current / total) * 100} />
-      <span className="text-xs font-light">{(current)/total * 100}% of budget used</span>
+      <span className="text-xs font-light">{Math.round((current)/total * 100)}% of budget used</span>
     </Card>
   )
 }

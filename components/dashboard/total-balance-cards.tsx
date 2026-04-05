@@ -30,7 +30,7 @@ export function TotalBalanceCard() {
             Trending up this month <TrendingUpIcon className="size-4" />
           </div>
           <div className="text-muted-foreground">
-            Visitors for the last 6 months
+            includes this month`s revenue
           </div>
         </CardFooter>
         <div className="flex w-full flex-row gap-1.5 rounded-sm p-2">
