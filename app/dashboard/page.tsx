@@ -8,7 +8,7 @@ import { SiteHeader } from "@/components/layout/site-header"
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
 
 import { BudgetOverviewCard } from "@/components/dashboard/budget-overview-card"
-import { SpendingCard } from "@/components/dashboard/spending-card"
+import { DonutChart } from "@/components/dashboard/spending-card/donut-chart"
 
 export default function Page() {
 
@@ -31,7 +31,7 @@ export default function Page() {
               <div className="flex w-full flex-row ">
                 <TotalBalanceCard />
                 <BudgetOverviewCard />
-                <SpendingCard />
+                <DonutChart />
               </div>
               <div className="flex justify-between px-4 lg:px-6 lg:gap-4 :gap-2">
                 <ChartAreaInteractive />

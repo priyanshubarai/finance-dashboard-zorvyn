@@ -1,0 +1,14 @@
+[
+    { "category": "Housing", "value": 4200
+    },
+    { "category": "Food & Dining", "value": 1200
+    },
+    { "category": "Transportation", "value": 800
+    },
+    { "category": "Entertainment", "value": 600
+    },
+    { "category": "Utilities", "value": 450
+    },
+    { "category": "Shopping", "value": 900
+    }
+]
