@@ -15,7 +15,7 @@ export function DonutChart() {
     useLayoutEffect(() => {
         if (!chartAndLegendContainer.current) return
 
-        let chart = am4core.create(chartAndLegendContainer.current, am4charts.PieChart)
+        const chart = am4core.create(chartAndLegendContainer.current, am4charts.PieChart)
         chart.hiddenState.properties.opacity = 0
 
         chart.data = chartData;
@@ -25,7 +25,7 @@ export function DonutChart() {
         chart.startAngle = 0
         chart.endAngle = 360
 
-        let series = chart.series.push(new am4charts.PieSeries())
+        const series = chart.series.push(new am4charts.PieSeries())
         series.dataFields.value = "value"
         series.dataFields.category = "category"
         // series.dataFields.radiusValue = "value"

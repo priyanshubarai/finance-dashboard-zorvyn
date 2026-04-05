@@ -9,6 +9,9 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import { Switch } from "@/components/ui/switch"
+import { useThemeStore } from "@/lib/store/themeStore"
+
 
 export function NavSecondary({
   items,
@@ -20,10 +23,18 @@ export function NavSecondary({
     icon: React.ReactNode
   }[]
 } & React.ComponentPropsWithoutRef<typeof SidebarGroup>) {
+  
+  const {isDark, toggleTheme} = useThemeStore()
+  
   return (
     <SidebarGroup {...props}>
       <SidebarGroupContent>
         <SidebarMenu>
+          <SidebarMenuItem className="flex gap-3 pl-2">
+            <Switch defaultChecked={!isDark} onCheckedChange={toggleTheme}/>
+            <span>Lights</span>
+          </SidebarMenuItem>
+
           {items.map((item) => (
             <SidebarMenuItem key={item.title}>
               <SidebarMenuButton asChild>

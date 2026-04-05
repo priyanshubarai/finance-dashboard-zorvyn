@@ -1,6 +1,5 @@
 "use client"
 
-import * as React from "react"
 import { flexRender, type Table, type ColumnDef } from "@tanstack/react-table"
 import {
   Table as UITable,
@@ -14,7 +13,6 @@ import { TableHeaderCell } from "./table-header-cell"
 
 interface TransactionTableBodyProps<TData> {
   table: Table<TData>
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   columns: ColumnDef<TData, any>[]
 }
 

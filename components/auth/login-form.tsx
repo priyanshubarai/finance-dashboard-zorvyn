@@ -8,7 +8,6 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Field, FieldContent, FieldDescription, FieldGroup, FieldLabel, FieldTitle } from "@/components/ui/field"
-import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { useState } from "react"
 import { RoleType } from "@/lib/store/roleStore"
@@ -34,13 +33,13 @@ export function LoginForm({ className, setRole, ...props }: LoginFormProps) {
         <CardHeader className="text-center">
           <CardTitle className="text-xl">Welcome back</CardTitle>
           <CardDescription>
-            Login with your Apple or Google account
+            Login as Admin or Viewer
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit}>
             <FieldGroup>
-              <RadioGroup defaultValue={selectedRole} className="max-w-sm">
+              <RadioGroup value={selectedRole} onValueChange={(value) => setSelectedRole(value as RoleType)} className="max-w-sm">
 
                 <FieldLabel htmlFor="admin">
                   <Field orientation="horizontal">
