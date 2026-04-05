@@ -34,7 +34,9 @@ export function DataTable() {
 
   React.useEffect(() => {
     setColumnFilters((old) => {
-      const filters = Array.isArray(old) ? old.filter((f) => f.id !== "description") : []
+      const filters = Array.isArray(old)
+        ? old.filter((f) => f.id !== "description")
+        : []
       if (searchQuery) {
         filters.push({ id: "description", value: searchQuery })
       }
@@ -62,9 +64,12 @@ export function DataTable() {
   })
 
   return (
-    <Tabs defaultValue="outline" className="w-full flex-col justify-start gap-6">
+    <Tabs
+      defaultValue="outline"
+      className="w-full flex-col justify-start gap-6"
+    >
       <Separator />
-      <p className="px-4 text-sm mx-3 text-muted-foreground">
+      <p className="mx-3 px-4 text-sm text-muted-foreground">
         Note: click on the column header to trigger sorting
       </p>
 
@@ -81,8 +86,16 @@ export function DataTable() {
         value="outline"
         className="relative flex flex-col gap-4 overflow-auto px-4 lg:px-6"
       >
-        <TransactionTableBody table={table} columns={columns} />
-        <TablePagination table={table} />
+        {data.length ? (
+          <>
+          <TransactionTableBody table={table} columns={columns} />
+          <TablePagination table={table} />
+          </>
+        ) : (
+          <span className="font-medium text-muted-foreground">
+            Data Not Available
+          </span>
+        )}
       </TabsContent>
     </Tabs>
   )

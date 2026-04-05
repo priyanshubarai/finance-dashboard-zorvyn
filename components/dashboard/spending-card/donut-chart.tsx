@@ -61,7 +61,8 @@ export function DonutChart() {
                     <CardDescription>Monthly Expenses Distribution</CardDescription>
                 </CardHeader>
                 <CardContent className="flex h-80 flex-col gap-3 py-1">
-                    <div ref={chartAndLegendContainer} style={{ width: "100%", height: "100%" }} />
+                    {chartData.length ? <div ref={chartAndLegendContainer} style={{ width: "100%", height: "100%" }} />
+                    : <span className="font-medium text-muted-foreground">Data Not Available</span>}
                 </CardContent>
             </Card>
         </div>
